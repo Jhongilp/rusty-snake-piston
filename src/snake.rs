@@ -56,4 +56,9 @@ impl Snake {
       draw_block(SNAKE_COLOR, block.x, block.y, ctx, g);
     }
   }
+
+  pub fn head_position(&self) -> (i32, i32) {
+    let head_block = self.body.front().unwrap();
+    (head_block.x, head_block.y)
+  }
 }
