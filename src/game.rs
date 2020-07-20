@@ -77,4 +77,23 @@ impl Game {
             draw_rectagle(GAMEOVER_COLOR, 0, 0, self.width, self.height, ctx, g)
         }
     }
+
+    pub fn update(&mut self, delta_time: f64) {
+        self.waiting_time += delta_time;
+
+        if self.game_over {
+            if self.waiting_time > RESTART_GAME {
+                self.restart();
+            }
+            return;
+        }
+
+        if !self.food_exists {
+            self.add_food();
+        }
+
+        if self.waiting_time > MOVING_PERIOD {
+            self.update_snake(None);
+        }
+    }
 }
