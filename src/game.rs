@@ -60,4 +60,21 @@ impl Game {
 
         // self.update_snake(dir);
     }
+
+    pub fn draw(&self, ctx: &Context, g: &mut G2d) {
+        self.snake.draw(ctx, g);
+
+        if self.food_exists {
+            draw_block(FOOD_COLOR, self.food_x, self.food_y, ctx, g);
+        }
+
+        draw_rectagle(BORDER_COLOR, 0, 0, self.width, 1, ctx, g);
+        draw_rectagle(BORDER_COLOR, 0, self.height - 1, self.width, 1, ctx, g);
+        draw_rectagle(BORDER_COLOR, 0, 0, 1, self.height, ctx, g);
+        draw_rectagle(BORDER_COLOR, self.width - 1, 0, 1, self.height, ctx, g);
+
+        if self.game_over {
+            draw_rectagle(GAMEOVER_COLOR, 0, 0, self.width, self.height, ctx, g)
+        }
+    }
 }
